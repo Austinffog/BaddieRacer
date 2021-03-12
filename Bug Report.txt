@@ -1,0 +1,68 @@
+Purpose
+The purpose of this bug report is to document any issues, errors and problems that occur during developement of the game Baddie Racer.
+
+Menus
+This is to document any errors that occur with the Menus script and the menu gameObjects: VictoryMenu, GameOverMenu, PauseMenu and MainMenu.
+
+Type: UI Testing
+
+Issue: Pause Menu Interferance with other Menus
+If the user won or lost the game and a VictoryMenu or GameOverMenu was set active and they pressed the Pause button the Pause Menu would load underneath.
+
+Fix
+Fixed by creating two boolean variables gameIsOver and gameIsVictory, both set to false in the Start() method and when the Replay button is pressed.
+If the gameOverMenu is set active the gameIsOver variable is set to true or victoryMenu is set active the gameIsVictory variable is set to true, 
+an if else statement is written in the Pause method to check whether either is true. If one is true then nothing occurs and the PauseMenu is not loaded, 
+if they are both false then the Pause button will set the PauseMenu active when pressed.
+
+Issue: Resetting score from Main Menu Play Button
+If the user paused the game, before finishing it and went back to the Main Menu or exited the game before finishing and then returned later and pressed
+the play button. Their score would not reset from the previous game.
+
+Fix
+Fixed by fetching the points PlayerPref for the the PlayerCar and the blackCarPoint PlayerPref for the BlackCar and setting them to zero when the Play button
+is pressed in the MainMenu.
+
+Issue: Game state remains paused
+If the user won or lost the game and the gameOverMenu or victoryMenu was set active and they went back to the Main Menu then pressed play the game would
+remain paused. Time.timeScale was still set to 0f.
+
+Fix
+Fixed by setting Time.timeScale to 1f in the Start() method so that every game won't start in the paused state.
+
+Player Script
+This is to document any errors that occur within the Player script and how they affect the game.
+
+Issue: GameObjects do not exist in current active scene
+The enemy car prefabs: YellowCar, BlueCar, GreenCar, PurpleCar, PinkCar, RedCar and BlackCar do not exist in the Game scene, so when the game is played 
+an Object reference error occurs.
+
+Fix
+Fixed by instantiating the Prefabs in the Player script since it is attached to the PlayerCar gameObject which already exists in the Game scene.
+
+Issue: Instantiating Prefabs in same position
+The same spawnPosition variable was used for each Prefab to instantiate, this caused each Prefab to instantiate in the exact same position, which caused collisions
+between the gameObjects.
+
+Fix
+Fixed by creating a unique spawnPosition for each car prefab respectively: spawnPositionYellow, spawnPositionBlue, spawnPositionGreen, spawnPositionPurple,
+spawnPositionPink, spawnPositionRed and spawnPositionBlack. This allows for random spawn points to be assigned to each prefab being instantiated.
+
+EnemyFollow Script
+This is to document the issues that occurred within the EnemyFollow script and how the problem was handled.
+
+Issue: Error fetching Transform component from Enemy Script to EnemyFollow Script
+A major error that was occuring and kept resulting in the game stopping was the gameObjects in the running Game scene being deleted when the PlayerCar collided 
+with them. The EnemyFollow script on the BlackCar would try to access the deleted gameObjects Transform component even though it no longer existed.
+
+Fix
+Many differnt ways of solving this problem were tried:
+*Tried creating if else statements to check if the target Transform is null and if it was to change to a different target, this was tedious and worked but only
+temporarily. If the other target became null the error would reoccur.
+*If else statements were written in the OnCollisonEnter method to try and catch if the target Transform was null which did not work.
+*If else statement was written in the Update() method to check if the target is null which did not work.
+*I then decided to change the Enemy script and not have the gameObjects get destroyed but rather change its Transform position when collided with, this did not 
+work.
+*I wrote try and catch with finally statements, this worked but the code was long.
+Fixed by simply taking the target variables from the Start() method and placing them in the Update() method so that they are not assigned only in the Start()
+method but for every Update() frame. This keeps the target Transform updated with the collision in the Enemy script and having it destroyed.   

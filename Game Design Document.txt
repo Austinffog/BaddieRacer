@@ -1,0 +1,101 @@
+Game Name
+Baddie Racer
+
+Purpose
+The purpose of this game is to implement the use of a game design document and game testing. With features such as manual testing, bug analyzes, 
+debugging and error handling.
+
+Overview
+* The game will be a simple 2D game.
+* You will drive around trying to bump into other racers and destroy their car.
+-Concept added during gameplay, the player car will race against an enemy car to 100 points.
+
+Target Audience
+* Players interested in indie games.
+* Players that like racing/car games.
+
+Gameplay
+* The player will randomly drive around an area at a speed of 7.
+* They can bump into yellow cars for 5 points which will travel at the slowest speed of 5.
+* They can bump into blue cars for 10 points which travel faster than the yellow at a speed of 6.5.
+* The red cars will chase after the racer, trying to bump and steal 3points, traveling at the same defualt speed as the racer.
+-This was changed to a speed of 6, during development, to reduce the challenge of the game.
+* Gameplay added during development *
+* Green cars for 15 points at a speed of 7.
+* Purple cars for 20 points at a speed of 7.5.
+* Pink cars for 25 points at a speed of 8.
+* Black cars which will race against the player, bumping into cars collecting points at a speed of 6.5.
+-The speeds of the enemy cars were originally higher, but lowered to decrease the difficulty level of the game.
+* Obstacle Puddle that slows down the PlayerCar's speed from 7f to 5f for 7 seconds, randomly spawns around the RaceTrack.
+* The YellowCar drops a SpeedUp power up when destroyed that increases speed from 7f to 8f for 7 seconds.
+
+Objective
+* The objective of the game is to increase your score as much as possible.
+-And reach 100 points before the black car.
+* Survive against the red car.
+
+Gameplay Mechanics
+* Start Menu, gameover menu (if lose), pause menu and victory menu (if win).
+-Start menu buttons: play, exit.
+-Gameover menu buttons: play again, exit, main menu.
+-Pause menu buttons: resume, exit, start menu.
+-Victory menu buttons: play again, exit, main menu.
+
+Game Engine, Language
+* Game will be written in C# using unity.
+
+Platforms
+* Created for Windows PC, possibly Linux PC, possibly Mac PC.
+
+Future Platforms
+* Mobile game for android with touch controls or a joystick control for movement.
+
+Gameplay Features
+* There will be two highscores: one for number of cars bumped by player and another for the enemy black car.
+* Game state will not be saved.
+
+Future Gameplay Ideas
+* Increase the different types of coloured cars, both enemy ones to chase and ones that chase after you.
+* Include different maps to drive around, each with a different theme and size.
+* Include more obstacles such as: cones, pedestrians and pets, spikes, oil spills and tires.
+* Allow the player to choose and unlock different types of cars to drive.
+* Reward system, allow bronze, silver and gold medals to be earned based on amount of cars bumped each game.
+* Ability pick ups such as: Health packs, increase car size, and slow enemy cars down.
+
+Assets
+* Red, yellow and blue cars.
+-Includung green, purple, pink and black.
+* Player car will be white.
+* Default map.
+* Puddle and SpeedUp.
+
+UI
+* Points for player car.
+* Points for black car.
+* A pause button.
+
+Sound
+* Background music to fit a race track.
+* Crashing sounds for when the player bumps into the car.
+* Sounds for button clicks.
+* Puddle sound and SpeedUp.
+
+Future sounds
+* A unique sound to go with each pick up currently thought of.
+* A sound for skid marks, pedestrians and animals screaming.
+
+Game Testing Plan
+* Use try and catch methods for multiple cars bumped at the same time or 
+* being bumped by a red car and bumping another car (either yellow or blue) at the same time, to register the input.
+* Test to ensure the main players car's position on the x, y, and z does not rotate or get displaced from collisions.
+* AI logic, the enemy cars are correctly following the player or driving away from the player. 
+* Make sure the enemy cars colliding (bumping) into each other causes no rotation and position changes. 
+
+UI Testing
+* Run tests on the menus, to check if the buttons work and function correctly.
+* View art is visible and there are no clipping with assets. 
+* Check if the camera follows the PlayerCar and the car doesn't go off screen.
+
+Sound Testing
+* Music is audible, not to loud and distracting.
+* Sound effects are not to loud or soft and are correctly triggered, with no uneccessary delay.
